@@ -63,7 +63,7 @@ public class Registeration {
                     }
                     break;
                 }
-                content.close();
+                
               }
                 if(flag==0)
                 {
@@ -81,7 +81,7 @@ public class Registeration {
                     this.login();
                 }
              
-             
+                content.close();
         }
         else
         {
@@ -114,11 +114,11 @@ public class Registeration {
          
         System.out.println("Enter User Name: ");
         String Uname=sc.nextLine();
-        
+        System.out.println(Uname);
          
         System.out.println("Enter Password: ");
         String Pass=sc.nextLine();
-        
+        System.out.println(Pass);
         Uname=Uname.trim();
         Pass=Pass.trim();
         String x= Uname+" "+Pass;
