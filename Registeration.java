@@ -7,8 +7,9 @@ import java.io.FileWriter;
  
 public class Registeration {
      
-    private void register() throws FileNotFoundException
+    public void register() throws FileNotFoundException
     {
+        System.out.println("                                         Welcome to Our System :)                        ");
         Scanner sc=new Scanner(System.in);
          
         System.out.println("Enter User Name: ");
@@ -133,8 +134,7 @@ public class Registeration {
                 String data = content.nextLine();
                 if(data.equals(x))
                 {
-                    System.out.println("Login Successful");
-                    System.out.println("Welcome to the Application.");
+                    Home.Welcome();
                     flag=1;
                     break;
                 }
@@ -196,7 +196,7 @@ public class Registeration {
         Scanner sc=new Scanner(System.in);
         System.out.println("1. Registration. ");
         System.out.println("2. Login. ");
-         
+        System.out.println("3. Exit. ");
         System.out.println("Enter your Choice");
         choice=sc.nextInt();
         sc.nextLine();
@@ -210,6 +210,13 @@ public class Registeration {
         {
             Registeration user = new Registeration();
             user.login();
+        }
+        else if(choice == 3 )
+        {
+            System.out.print("\u001b[2J");
+            System.out.flush();
+            System.out.println("Thx for using our program :) ");
+            System.exit(1);
         }
         else
         {
