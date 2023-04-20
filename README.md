@@ -22,7 +22,7 @@ To run this project just open it from any text editor or IDE.
 
 ## Features
 
-- Error Handled 
+- Fast 
 - Easy To Use
 - Cross platform
 
