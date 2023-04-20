@@ -1,6 +1,6 @@
 # LibraryManagementSystem
 
-This is V1.0 of our Basic LibraryManagementSystem project using JAVA. The version is not going to be special it is just a Basic System without any GUI.
+This is V1.0 of our Basic LibraryManagementSystem project using JAVA. This version is not going to be special it is just a Basic System without any GUI.
 We will always keep the project updated with more advanced functions and UI. The project is still under development.
 
 
