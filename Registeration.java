@@ -6,9 +6,10 @@ import java.io.IOException;
 import java.io.FileWriter;
  
 public class Registeration {
-     
+    String lib = "1"; 
     public void register() throws FileNotFoundException
     {
+       
         System.out.println("                                         Welcome to Our System :)                        ");
         Scanner sc=new Scanner(System.in);
          
@@ -30,13 +31,12 @@ public class Registeration {
          
          
  
-        String x= Uname+" "+Pass;
+        String x= Uname+" "+Pass+" "+lib;
         if(Pass.equals(ConPass))
         {
              
               File f = new File("Registration.txt");
               Scanner content = new Scanner(f);
-               
                
               int flag=0;
               while (content.hasNextLine()) {
@@ -70,7 +70,7 @@ public class Registeration {
                 {
                     try {
                         BufferedWriter out = new BufferedWriter(new FileWriter("Registration.txt", true)); 
-                        out.write(Uname+" "+Pass+"\n");
+                        out.write(Uname+" "+Pass+" "+lib+"\n");
                         out.close();
                     }
                     catch (IOException e) {
@@ -110,23 +110,22 @@ public class Registeration {
      
     public void login()
     {
-         
+        
         Scanner sc=new Scanner(System.in);
          
         System.out.println("Enter User Name: ");
         String Uname=sc.nextLine();
-        System.out.println(Uname);
+       
          
         System.out.println("Enter Password: ");
         String Pass=sc.nextLine();
-        System.out.println(Pass);
+       
         Uname=Uname.trim();
         Pass=Pass.trim();
-        String x= Uname+" "+Pass;
-         
-         
+        String x= Uname+" "+Pass+" "+lib;
+        
         try {
-             
+              
               File f = new File("Registration.txt");
               Scanner content = new Scanner(f);
               int flag=0;
@@ -134,10 +133,17 @@ public class Registeration {
                 String data = content.nextLine();
                 if(data.equals(x))
                 {
-                    Home.Welcome();
+                    Libraria.Welcome();
                     flag=1;
                     break;
                 }
+                else if(!data.equals(x))
+                {
+                    System.out.print("Reader\n");
+                    flag=1;
+                    break;
+                }
+                
               }
                 if(flag==0)
                 {
