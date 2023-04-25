@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.FileWriter;
 import java.util.*;
 
-public class Libraria extends Registeration {
-    public static void Welcome() throws FileNotFoundException{
+public class Librarian extends Registeration {
+    public static void Welcome() throws IOException{
         try {
              
             File obj = new File("Readers.txt");
@@ -37,7 +37,7 @@ public class Libraria extends Registeration {
             {
                 System.out.print("\u001b[2J");
                 System.out.flush();
-                Libraria.adduser();
+                Librarian.adduser();
                 break;
             }
             case 6:{ 
@@ -60,7 +60,6 @@ public class Libraria extends Registeration {
     {
         String name;
         String pass;
-        int id;
         String conpass;
         Scanner s = new Scanner(System.in);
         System.out.println("Enter User's Name: ");
@@ -69,12 +68,11 @@ public class Libraria extends Registeration {
         pass = s.nextLine();
         System.out.println("Confirm User's Password: ");
         conpass=s.nextLine();
-        System.out.println("Enter User's ID: ");
-        id = s.nextInt();
+        
 
         name=name.trim();
         pass=pass.trim();
-        String x=name+" "+pass+" "+id;
+        String x =name+" "+pass;
 
         if(pass.equals(conpass))
         {
@@ -94,7 +92,7 @@ public class Libraria extends Registeration {
               {
                   try {
                       BufferedWriter out = new BufferedWriter(new FileWriter("Readers.txt", true)); 
-                      out.write(name+" "+pass+" "+id+"\n");
+                      out.write(name+" "+pass+"\n");
                       out.close();
                   }
                   catch (IOException e) {
@@ -103,10 +101,57 @@ public class Libraria extends Registeration {
                    
                   System.out.println("Successfully Registered");
                   
-                }
+              }
+              
                 file.close();
         }
        // s.close();
     }
-    
+    public static void loginReader()
+    {
+        Scanner sc=new Scanner(System.in);
+
+        System.out.println("Enter User Name: ");
+        String Uname=sc.nextLine();
+       
+         
+        System.out.println("Enter Password: ");
+        String Pass=sc.nextLine();
+
+        Uname=Uname.trim();
+        Pass=Pass.trim();
+
+        String x = Uname+" "+Pass;
+
+        try {
+              
+            File f = new File("Readers.txt");
+            Scanner content = new Scanner(f);
+            int flag=0;
+            while (content.hasNextLine()) {
+              String data = content.nextLine();
+              if(data.equals(x))
+              {
+                  System.out.println("Welcome Reader!");
+                  flag=1;
+                  break;
+              }
+              
+            }
+              if(flag==0)
+              {
+                  System.out.println("Sorry :( You don't have an account ask the librarian for one...");
+              }
+              
+             
+            content.close();
+          } 
+          catch (FileNotFoundException e) {
+           
+               
+            System.out.println("Error.");
+            e.printStackTrace();
+          }
+       
+    }
 }
