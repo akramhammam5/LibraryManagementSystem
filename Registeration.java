@@ -7,7 +7,7 @@ import java.io.FileWriter;
  
 public class Registeration {
     String lib = "1"; 
-    public void register() throws FileNotFoundException
+    public void register() throws IOException
     {
        
         System.out.println("                                         Welcome to Our System :)                        ");
@@ -108,7 +108,7 @@ public class Registeration {
         sc.close();
     }
      
-    public void login()
+    public void login() throws IOException
     {
         
         Scanner sc=new Scanner(System.in);
@@ -122,8 +122,7 @@ public class Registeration {
        
         Uname=Uname.trim();
         Pass=Pass.trim();
-        String x= Uname+" "+Pass+" "+lib;
-        
+        String x = Uname+" "+Pass+" "+lib;
         try {
               
               File f = new File("Registration.txt");
@@ -133,13 +132,7 @@ public class Registeration {
                 String data = content.nextLine();
                 if(data.equals(x))
                 {
-                    Libraria.Welcome();
-                    flag=1;
-                    break;
-                }
-                else if(!data.equals(x))
-                {
-                    System.out.print("Reader\n");
+                    Librarian.Welcome();
                     flag=1;
                     break;
                 }
@@ -166,6 +159,7 @@ public class Registeration {
                         System.out.println("Choose Proper Option");
                     }
                 }
+                
                
               content.close();
             } 
@@ -179,7 +173,7 @@ public class Registeration {
         sc.close();
     }
      
-    public static void main(String[] args) throws FileNotFoundException{
+    public static void main(String[] args) throws IOException{
      
         try {
              
@@ -201,8 +195,9 @@ public class Registeration {
         int choice;
         Scanner sc=new Scanner(System.in);
         System.out.println("1. Registration. ");
-        System.out.println("2. Login. ");
-        System.out.println("3. Exit. ");
+        System.out.println("2. Login as Librarian. ");
+        System.out.println("3. Login as Reader. ");
+        System.out.println("4. Exit. ");
         System.out.println("Enter your Choice");
         choice=sc.nextInt();
         sc.nextLine();
@@ -217,7 +212,11 @@ public class Registeration {
             Registeration user = new Registeration();
             user.login();
         }
-        else if(choice == 3 )
+        else if(choice == 3)
+        {
+            Librarian.loginReader();
+        }
+        else if(choice == 4 )
         {
             System.out.print("\u001b[2J");
             System.out.flush();
