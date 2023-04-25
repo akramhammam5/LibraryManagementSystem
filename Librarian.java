@@ -1,7 +1,11 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.util.*;
 
@@ -28,7 +32,7 @@ public class Librarian extends Registeration {
         System.out.flush();
         System.out.println("\t\t              Welcome To LibraryManagementSystem :)           \n\n");
         System.out.println("you are a Librarian What do you'd like to do today :) ?");
-        System.out.println("1- Add User\n2- Add Books\n3-Search for books\n4-Search for a member\n5-Block a user\n6-Rent a book\n6-Logout\n");
+        System.out.println("1-Add User\n2-Add Books\n3-Search for books\n4-Search for a member\n5-Block a user\n6-Rent a book\n6-Remove User\n7-Logout");
         System.out.println("Choice: ");
         int choice = scan.nextShort();
 
@@ -40,7 +44,14 @@ public class Librarian extends Registeration {
                 Librarian.adduser();
                 break;
             }
-            case 6:{ 
+            case 6:
+            {
+                System.out.print("\u001b[2J");
+                System.out.flush();
+                Librarian.removeUser();
+                break;
+            }
+            case 7:{ 
             System.out.print("\u001b[2J");
             System.out.flush();
             System.out.println("Logged Out!\n\n\n");
@@ -107,6 +118,31 @@ public class Librarian extends Registeration {
         }
        // s.close();
     }
+    public static void removeUser() throws IOException
+    {
+        Scanner s = new Scanner(System.in);
+
+        File inventory = new File("Readers.txt");
+        System.out.println("Enter User's Name: ");
+        String name = s.nextLine();
+        File temp = new File("deleteditems.txt");
+
+        BufferedReader reader = new BufferedReader(new FileReader("Readers.txt"));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("deleteditems.txt"));
+        temp.createNewFile();
+        while((name = reader.readLine()) != null) {
+          String trimmedLine = name.trim();
+          if(!trimmedLine.contains(name)) {
+             writer.write(name + 
+                System.getProperty("line.separator"));
+          }
+        }
+        reader.close(); 
+        writer.close(); 
+        inventory.delete();
+        temp.renameTo(inventory);
+        
+    }
     public static void loginReader()
     {
         Scanner sc=new Scanner(System.in);
@@ -154,4 +190,5 @@ public class Librarian extends Registeration {
           }
        
     }
+  
 }
