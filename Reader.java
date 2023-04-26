@@ -6,13 +6,14 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.Scanner;
 
 
 
 public class Reader {
-    public static void loginReader()
+    public static void loginReader() throws IOException
     {
         Scanner sc=new Scanner(System.in);
 
@@ -26,10 +27,10 @@ public class Reader {
         Uname=Uname.trim();
         Pass=Pass.trim();
 
-        String x = Uname+" "+Pass;
+        String x ="Name: "+Uname+" "+"Password: "+Pass;
 
         try {
-              
+            Scanner s = new Scanner(System.in);
             File f = new File("Readers.txt");
             Scanner content = new Scanner(f);
             int flag=0;
@@ -37,7 +38,46 @@ public class Reader {
               String data = content.nextLine();
               if(data.equals(x))
               {
-                  System.out.println("Welcome Reader!");
+                  System.out.print("\u001b[2J");
+                  System.out.flush();
+                  System.out.println("Welcome Reader! What do you want to do today:) ?\n");
+                  System.out.println("1-Search for a book\n2-Search for a user\n3-Rent a book\n4-Buy a book\n5-Logout\n");
+                  int choice=s.nextInt();
+
+                  switch(choice)
+                  {
+                    case 1:
+                    {
+                        System.out.print("\u001b[2J");
+                        System.out.flush();
+                        Librarian.SearchBook();
+                        break;
+                    }
+                    case 2:
+                    {
+                      System.out.print("\u001b[2J");
+                        System.out.flush();
+                        Librarian.searchUser();
+                        break;
+                    }
+                    case 4:
+                    {
+                      System.out.print("\u001b[2J");
+                      System.out.flush();
+                      Request.Buy();
+                      break;
+                    }
+                    case 5:
+                    {
+                      System.out.print("\u001b[2J");
+                      System.out.flush();
+                      System.out.println("Logged Out!\n\n\n");
+                      Main R = new Main();
+                      R.main(null);
+                      break;
+                    }
+
+                  }
                   flag=1;
                   break;
               }
