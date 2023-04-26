@@ -7,7 +7,7 @@ We will always keep the project updated with more advanced functions and UI. The
 ## Authors
 
 - [@AkramHammam](https://www.github.com/akramhammam5)
-- []()
+- [@Farahamer](https://www.github.com/Farahamer)
 - []()
 - []()
 
