@@ -35,5 +35,9 @@ public class Book {
    {
         return isbn;
    }
+   public void display()
+   {
+     System.out.println("Title: "+Title+"\n"+"Pirce: "+getPrice()+"\n"+"Author: "+Author+"\n"+"ISBN: "+getIsbn()+"\n"+"Copies: "+Num_of_copies+"\n"+"Location: "+Location+"\n");
+   }
 
 }
