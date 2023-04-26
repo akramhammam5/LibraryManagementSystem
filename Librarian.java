@@ -51,6 +51,13 @@ public class Librarian extends Book {
                 Librarian.AddBook();
                 break;
             }
+            case 3:
+            {
+                System.out.print("\u001b[2J");
+                System.out.flush();
+                Librarian.SearchBook();
+                break;
+            }
             case 4:
             {
               System.out.print("\u001b[2J");
@@ -145,24 +152,42 @@ public class Librarian extends Book {
     {
         Scanner s = new Scanner(System.in);
 
+
         File fileToBeModified = new File("Readers.txt");
         System.out.println("Enter User's Name: ");
         String name = s.nextLine();
-        String old="";
-        BufferedReader reader = new BufferedReader(new FileReader(fileToBeModified));
+        // construct temporary file
+        File inputFile = new File("Readers.txt");
+        File tempFile = new File(inputFile + "temp.txt");
 
-        String line = reader.readLine();
+        BufferedReader br = new BufferedReader (new FileReader("Readers.txt"));
+        PrintWriter Pwr = new PrintWriter(new FileWriter (tempFile));
+        String line = null;
 
-        while (line != null)
-        {
-        old = old + line + System.lineSeparator();
-        line = reader.readLine();
+     //read from original, write to temporary and trim space, while title not found
+     while((line = br.readLine()) !=null) {
+         if(line.trim().startsWith(name)){
+             continue;          }
+         else{
+             Pwr.println(line);
+             Pwr.flush();
+
+         }
+     }
+     // close readers and writers
+     br.close();
+     Pwr.close();
+
+     // delete book file before renaming temp
+     inputFile.delete();
+
+     // rename temp file back to books.txt
+     if(tempFile.renameTo(inputFile)){
+            System.out.println("Update succesful");
+        }else{
+            System.out.println("Update failed");
         }
-        String newContent = old.replaceAll(name," ");
-        FileWriter writer = new FileWriter(fileToBeModified);
-        writer.write(newContent);
-        reader.close(); 
-        writer.close(); 
+        Librarian.Welcome();
        
         
     }
@@ -300,8 +325,20 @@ public static void removeBook() throws IOException
         }
         Librarian.Welcome();
     }
-       
+    public static void SearchBook() throws FileNotFoundException
+    {
+      Scanner s = new Scanner(System.in);
+      Scanner input = new Scanner(new File("Books.txt"));
+      System.out.println("Enter the name of the Book you want to search about: ");
+      String u = s.nextLine();
+      while (input.hasNext()) {
+        String search = input.nextLine().toString();
+        if (search.contains(u)) { 
+            System.out.println(search);
+        }
     }
+ }
+}
 
   
 
