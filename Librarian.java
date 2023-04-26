@@ -44,6 +44,13 @@ public class Librarian extends Registeration {
                 Librarian.adduser();
                 break;
             }
+            case 4:
+            {
+              System.out.print("\u001b[2J");
+              System.out.flush();
+              Librarian.searchUser();
+              break;
+            }
             case 6:
             {
                 System.out.print("\u001b[2J");
@@ -143,52 +150,22 @@ public class Librarian extends Registeration {
         temp.renameTo(inventory);
         
     }
-    public static void loginReader()
+    public static void searchUser() throws IOException
     {
-        Scanner sc=new Scanner(System.in);
-
-        System.out.println("Enter User Name: ");
-        String Uname=sc.nextLine();
-       
-         
-        System.out.println("Enter Password: ");
-        String Pass=sc.nextLine();
-
-        Uname=Uname.trim();
-        Pass=Pass.trim();
-
-        String x = Uname+" "+Pass;
-
-        try {
-              
-            File f = new File("Readers.txt");
-            Scanner content = new Scanner(f);
-            int flag=0;
-            while (content.hasNextLine()) {
-              String data = content.nextLine();
-              if(data.equals(x))
-              {
-                  System.out.println("Welcome Reader!");
-                  flag=1;
-                  break;
-              }
-              
-            }
-              if(flag==0)
-              {
-                  System.out.println("Sorry :( You don't have an account ask the librarian for one...");
-              }
-              
-             
-            content.close();
-          } 
-          catch (FileNotFoundException e) {
-           
-               
-            System.out.println("Error.");
-            e.printStackTrace();
-          }
-       
+      Scanner s = new Scanner(System.in);
+      Scanner input = new Scanner(new File("Readers.txt"));
+      System.out.println("Enter the name of the user you want to search about: ");
+      String u = s.nextLine();
+      while (input.hasNext()) {
+        String search = input.nextLine().toLowerCase().toString();
+        if (search.contains(u)) { 
+            System.out.println(search);
+        }
     }
+      
+
+
+    }
+   
   
 }
