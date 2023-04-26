@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
  
-public class Registeration {
+public class Main {
     String lib = "1"; 
     public void register() throws IOException
     {
@@ -70,7 +70,7 @@ public class Registeration {
                 {
                     try {
                         BufferedWriter out = new BufferedWriter(new FileWriter("Registration.txt", true)); 
-                        out.write(Uname+" "+Pass+" "+lib+"\n");
+                        out.write("Name: "+Uname+"Password: "+" "+Pass+"ID: "+" "+lib+"\n");
                         out.close();
                     }
                     catch (IOException e) {
@@ -204,17 +204,17 @@ public class Registeration {
          
         if(choice==1)
         {
-            Registeration user = new Registeration();
+            Main user = new Main();
             user.register();
         }
         else if(choice==2)
         {
-            Registeration user = new Registeration();
+            Main user = new Main();
             user.login();
         }
         else if(choice == 3)
         {
-            Librarian.loginReader();
+            Reader.loginReader();
         }
         else if(choice == 4 )
         {
