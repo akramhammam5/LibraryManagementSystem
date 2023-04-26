@@ -74,7 +74,7 @@ public class Librarian extends Registeration {
         //scan.close();
     }
     
-    public static void adduser() throws FileNotFoundException
+    public static void adduser() throws IOException
     {
         String name;
         String pass;
@@ -122,6 +122,7 @@ public class Librarian extends Registeration {
               }
               
                 file.close();
+                Librarian.Welcome();
         }
        // s.close();
     }
@@ -129,25 +130,25 @@ public class Librarian extends Registeration {
     {
         Scanner s = new Scanner(System.in);
 
-        File inventory = new File("Readers.txt");
+        File fileToBeModified = new File("Readers.txt");
         System.out.println("Enter User's Name: ");
         String name = s.nextLine();
-        File temp = new File("deleteditems.txt");
+        String old="";
+        BufferedReader reader = new BufferedReader(new FileReader(fileToBeModified));
 
-        BufferedReader reader = new BufferedReader(new FileReader("Readers.txt"));
-        BufferedWriter writer = new BufferedWriter(new FileWriter("deleteditems.txt"));
-        temp.createNewFile();
-        while((name = reader.readLine()) != null) {
-          String trimmedLine = name.trim();
-          if(!trimmedLine.contains(name)) {
-             writer.write(name + 
-                System.getProperty("line.separator"));
-          }
+        String line = reader.readLine();
+
+        while (line != null)
+        {
+        old = old + line + System.lineSeparator();
+        line = reader.readLine();
         }
+        String newContent = old.replaceAll(name," ");
+        FileWriter writer = new FileWriter(fileToBeModified);
+        writer.write(newContent);
         reader.close(); 
         writer.close(); 
-        inventory.delete();
-        temp.renameTo(inventory);
+       
         
     }
     public static void searchUser() throws IOException
