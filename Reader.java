@@ -15,6 +15,8 @@ import java.util.Scanner;
 public class Reader {
     public static void loginReader() throws IOException
     {
+
+      
         Scanner sc=new Scanner(System.in);
 
         System.out.println("Enter User Name: ");
@@ -55,9 +57,16 @@ public class Reader {
                     }
                     case 2:
                     {
-                      System.out.print("\u001b[2J");
+                        System.out.print("\u001b[2J");
                         System.out.flush();
                         Librarian.searchUser();
+                        break;
+                    }
+                    case 3:
+                    {
+                        System.out.print("\u001b[2J");
+                        System.out.flush();
+                        Request.Borrow();
                         break;
                     }
                     case 4:
