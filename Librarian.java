@@ -32,7 +32,7 @@ public class Librarian extends Book {
         System.out.flush();
         System.out.println("\t\t              Welcome To LibraryManagementSystem :)           \n\n");
         System.out.println("you are a Librarian What do you'd like to do today :) ?");
-        System.out.println("1-Add User\n2-Add Books\n3-Search for books\n4-Search for a member\n5-Block a user\n6-Rent a book\n6-Remove User\n7-Remove Book\n8-Logout");
+        System.out.println("1-Add User\n2-Add Books\n3-Search for books\n4-Search for a member\n5-Block a user\n6-Rent a book\n7-Remove User\n8-Remove Book\n9-Logout");
         System.out.println("Choice: ");
         int choice = scan.nextShort();
 
@@ -65,14 +65,28 @@ public class Librarian extends Book {
               Librarian.searchUser();
               break;
             }
+            case 5:
+            {
+                System.out.print("\u001b[2J");
+                System.out.flush();
+                Librarian.BlockUser();
+                break;
+            }
             case 6:
+            {
+                System.out.print("\u001b[2J");
+                System.out.flush();
+                Librarian.Rent();
+                break;
+            }
+            case 7:
             {
                 System.out.print("\u001b[2J");
                 System.out.flush();
                 Librarian.removeUser();
                 break;
             }
-            case 7:
+            case 8:
             {
                 System.out.print("\u001b[2J");
                 System.out.flush();
@@ -80,7 +94,7 @@ public class Librarian extends Book {
                 break;
             }
 
-            case 8:{ 
+            case 9:{ 
             System.out.print("\u001b[2J");
             System.out.flush();
             System.out.println("Logged Out!\n\n\n");
@@ -209,7 +223,134 @@ public class Librarian extends Book {
     }
     public static void BlockUser() throws IOException
     {
-      
+       Scanner s = new Scanner(System.in);
+       System.out.println("Enter the name of the user to block: ");
+       String name = s.nextLine();
+       File f = new File("Blocked.txt");
+        try{
+        if (f.createNewFile()) 
+            {
+              System.out.println("File is created");
+            } 
+             
+          } 
+          catch (IOException e) 
+          {
+            System.out.println("An error occurred.");
+
+            e.printStackTrace();
+          }
+          try {
+            BufferedWriter out = new BufferedWriter(new FileWriter("Blocked.txt", true)); 
+            out.write("Name: "+name+"\n");
+            out.close();
+            
+          }
+        
+        catch (IOException e) {
+            System.out.println("exception occoured" + e);
+        }
+         
+        Librarian.Welcome();
+    }
+    public static void Rent() throws IOException
+    {
+        Scanner s = new Scanner(System.in);
+        Book b = new Book();
+        
+        System.out.println("Enter the name 0f the Book: ");
+        String name = s.nextLine();
+        System.out.println("Enter the Start Date: ");
+        String Start = s.nextLine();
+        System.out.println("Enter the Due Date: ");
+        String due = s.nextLine();
+        Formatter x = null;
+        File f = new File("RentedLib.txt");
+        try{
+        if (f.createNewFile()) 
+            {
+              System.out.println("File is created");
+            } 
+             
+          } 
+          catch (IOException e) 
+          {
+            System.out.println("An error occurred.");
+
+            e.printStackTrace();
+          }
+        int ID=0;
+    try {
+        FileWriter r = new FileWriter("RentedLib.txt", true);
+        x = new Formatter(r);
+        x.format("%d %s %s %s%n",ID++,name);
+        x.close();
+    } catch(Exception e) {
+        e.printStackTrace();
+    }
+    String str =ID+" "+"Name: "+name+" "+"Start date: "+Start+" "+"Due Date: "+due;
+     
+              File r = new File("RentedLib.txt");
+              Scanner file = new Scanner(f);
+              int flag=0;
+              while (file.hasNextLine()) {
+                String data = file.nextLine();}
+                File fileToBeModified = new File("Books.txt");
+                // construct temporary file
+                File inputFile = new File("Books.txt");
+                File tempFile = new File(inputFile + "temp.txt");
+
+                BufferedReader br = new BufferedReader (new FileReader("Books.txt"));
+                PrintWriter Pwr = new PrintWriter(new FileWriter (tempFile));
+                String line = null;
+
+            //read from original, write to temporary and trim space, while title not found
+            while((line = br.readLine()) !=null) {
+                if(line.trim().startsWith(name)){
+                    try {
+                        BufferedWriter out = new BufferedWriter(new FileWriter("RentedLib.txt", true)); 
+                        out.write(ID+" "+"Name: "+name+" "+"Start date: "+Start+" "+"Due Date: "+due+"\n");
+                        out.close();
+                        
+                      }
+                    
+                    catch (IOException e) {
+                        System.out.println("exception occoured" + e);
+                    }
+                     
+                    System.out.println("Payment Succeeded :)");
+                    Librarian.Welcome();
+                }
+                else{
+                    File fileToBeModify = new File("RentedLib.txt");
+                    // construct temporary file
+                    File inputFil = new File("RentedLib.txt");
+                    File tempFil = new File(inputFile + "temp.txt");
+            
+                    BufferedReader br2 = new BufferedReader (new FileReader("Readers.txt"));
+                    PrintWriter Pwr2 = new PrintWriter(new FileWriter (tempFile));
+                    String line2 = null;
+            
+                 //read from original, write to temporary and trim space, while title not found
+                 while((line = br.readLine()) !=null) {
+                     if(!line.trim().startsWith(name)){
+                         Pwr2.println(line);
+                         Pwr2.flush();
+            
+                     }
+                 }
+                    System.out.println("Book is not available right now :(");
+                    Librarian.Welcome();
+                    
+                    
+                }
+            }
+              
+                file.close();
+
+
+    //s.close();
+
     }
     public static void AddBook() throws IOException
     {
@@ -338,6 +479,7 @@ public static void removeBook() throws IOException
         }
     }
  }
+ 
 }
 
   
