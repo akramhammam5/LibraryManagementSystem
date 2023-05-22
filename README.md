@@ -8,8 +8,8 @@ We will always keep the project updated with more advanced functions and UI. The
 
 - [@AkramHammam](https://www.github.com/akramhammam5)
 - [@FarahAmer ](https://www.github.com/farahamer189)
-- []()
-- []()
+- [@JohnNader](https://www.github.com/)
+- [@OmarTarek](https://www.github.com/)
 
 
 
