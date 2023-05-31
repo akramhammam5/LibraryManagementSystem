@@ -126,22 +126,68 @@ public class Main extends Application {
                 mainPane.add(loginButton, 0, 1);
                 
                 // Create the scene and show the stage
-                
-                
-                // Create the scene and show the stage
-                Scene scene = new Scene(mainPane, 400, 300);
-                primaryStage.setScene(scene);
-                primaryStage.show();
-                
-    
-    
 
+        // Add the login button to the main pane
+       
+        loginButton.setOnAction(event -> {
+        GridPane mainPane3 = new GridPane();
+        mainPane3.setPadding(new Insets(10));
+        mainPane3.setHgap(10);
+        mainPane3.setVgap(10);
+
+        // Add the labels and text fields to the main pane
+        Label usernameLabel = new Label("Username:");
+        TextField usernameTextField = new TextField();
+        mainPane3.add(usernameLabel, 0, 0);
+        mainPane3.add(usernameTextField, 1, 0);
+
+        Label passwordLabel = new Label("Password:");
+        PasswordField passwordTextField = new PasswordField();
+        mainPane3.add(passwordLabel, 0, 1);
+        mainPane3.add(passwordTextField, 1, 1);
+            // Get the user input
+            
+        Button submit = new Button("Login");
+        submit.setOnAction(event2 -> {
+            // Get the user input
+            String name = usernameTextField.getText();
+            
+            String password = passwordTextField.getText();
+
+            // Validate the user input
+            if (name.isEmpty() || password.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Please enter all required fields.");
+                alert.show();
+            } else {
+            
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Success");
+                alert.setContentText("Successfully Logged In!");
+                alert.show();
+            
+                // Create a new stage
+            }
+        
+        });
+        
+        mainPane3.add(submit, 0, 3);
+
+        // Create the scene and show the stage
+        Scene scene = new Scene(mainPane3, 400, 300);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        
+        });
+    
+        // Create the scene and show the stage
+        Scene scene = new Scene(mainPane, 400, 300);
+        primaryStage.setScene(scene);
+        primaryStage.show();          
+
+    
         }
-
-    
-
-
-
 
     public static void main(String[] args) {
          launch(args);
@@ -149,7 +195,7 @@ public class Main extends Application {
 }
 
 
-    
+   
         
 
 
